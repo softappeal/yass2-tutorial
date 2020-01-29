@@ -29,7 +29,7 @@ kotlin {
         compilations.all {
             kotlinOptions {
                 allWarningsAsErrors = true
-                freeCompilerArgs += "-Xuse-experimental=kotlin.Experimental" // TODO
+                freeCompilerArgs += "-Xuse-experimental=kotlin.Experimental"
             }
         }
     }

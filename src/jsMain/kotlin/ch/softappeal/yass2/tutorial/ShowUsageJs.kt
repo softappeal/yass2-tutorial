@@ -14,8 +14,10 @@ fun <T> callSuspendFunction(block: suspend () -> T): Promise<T> = GlobalScope.pr
 
 private val Config = TransportConfig(GeneratedSerializer, 100)
 
-suspend fun suspendFunction(): String {
+suspend fun showUsage(): String {
     showGeneratedUsage()
+
+    println("*** useRemoting ***")
 
     // shows client-side unidirectional remoting with Http
     useCalculator(Config.tunnel("/yass"), ::generatedRemoteProxyFactoryCreator)

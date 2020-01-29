@@ -15,9 +15,8 @@ suspend fun showGeneratedUsage() {
     useInterceptor(GeneratedProxyFactory)
 }
 
-fun useDumper(x: Dumper) {
+fun useDumper(dumper: Dumper) {
     println("*** useDumper ***")
-    println(x)
     val person = Person(
         "Guru",
         Gender.Female,
@@ -26,10 +25,7 @@ fun useDumper(x: Dumper) {
             Address("Hollywood Boulevard")
         )
     )
-
-    val d = dumper(GeneratedDumperProperties, BaseDumper)
-
-    println(StringBuilder().d(person))
+    println(StringBuilder().dumper(person))
     println()
 }
 

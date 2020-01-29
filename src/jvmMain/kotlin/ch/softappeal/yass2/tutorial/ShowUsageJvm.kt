@@ -1,3 +1,5 @@
+@file:UseExperimental(KtorExperimentalAPI::class)
+
 package ch.softappeal.yass2.tutorial
 
 import ch.softappeal.yass2.*
@@ -32,11 +34,11 @@ private suspend fun showReflectionUsage() {
     useInterceptor(ReflectionProxyFactory)
 }
 
+const val Host = "localhost"
 const val Port = 28947
 private const val Path = "/yass"
 private val Config = TransportConfig(GeneratedSerializer, 100, 100)
 
-@UseExperimental(KtorExperimentalAPI::class) // TODO
 fun createKtorEngine(invoker: Invoker): ApplicationEngine = embeddedServer(io.ktor.server.cio.CIO, Port) {
     install(io.ktor.websocket.WebSockets)
     routing {
@@ -53,13 +55,10 @@ fun createKtorEngine(invoker: Invoker): ApplicationEngine = embeddedServer(io.kt
         )))
 
         // shows server-side session based bidirectional remoting with WebSocket
-        webSocket(Path) {
-            receiveLoop(Config, acceptorSessionFactory())
-        }
+        webSocket(Path) { receiveLoop(Config, acceptorSessionFactory()) }
     }
 }
 
-@UseExperimental(KtorExperimentalAPI::class) // TODO
 private suspend fun useKtorRemoting(remoteProxyFactoryCreator: RemoteProxyFactoryCreator, invoker: Invoker) {
     println("*** useKtorRemoting ***")
     val engine = createKtorEngine(invoker)
@@ -69,15 +68,10 @@ private suspend fun useKtorRemoting(remoteProxyFactoryCreator: RemoteProxyFactor
             install(io.ktor.client.features.websocket.WebSockets)
         }.use { client ->
             // shows client-side unidirectional remoting with Http
-            useCalculator(client.tunnel(Config, "http://localhost:$Port$Path"), remoteProxyFactoryCreator)
+            useCalculator(client.tunnel(Config, "http://$Host:$Port$Path"), remoteProxyFactoryCreator)
 
             // shows client-side session based bidirectional remoting with WebSocket
-            client.ws(HttpMethod.Get, "localhost", Port, Path) {
-                try {
-                    receiveLoop(Config, initiatorSessionFactory())
-                } catch (ignore: Exception) {
-                }
-            }
+            client.ws(HttpMethod.Get, Host, Port, Path) { receiveLoop(Config, initiatorSessionFactory()) }
         }
     } finally {
         engine.stop(0, 0, TimeUnit.SECONDS)
