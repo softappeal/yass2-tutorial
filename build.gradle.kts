@@ -1,17 +1,18 @@
 // https://kotlinlang.org/docs/reference/building-mpp-with-gradle.html
 
-fun coroutines(module: String) = "org.jetbrains.kotlinx:kotlinx-coroutines-$module:1.3.3"
+fun coroutines(module: String) = "org.jetbrains.kotlinx:kotlinx-coroutines-$module:1.3.5"
 
-fun ktor(module: String) = "io.ktor:ktor-$module:1.3.0"
+fun ktor(module: String) = "io.ktor:ktor-$module:1.3.2"
 
-val yass2 = "ch.softappeal.yass2:yass2:3.0.0"
+val yass2 = "ch.softappeal.yass2:yass2:4.0.0"
 
 plugins {
-    kotlin("multiplatform") version "1.3.61"
+    kotlin("multiplatform") version "1.3.71"
 }
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 kotlin {
@@ -29,7 +30,7 @@ kotlin {
         compilations.all {
             kotlinOptions {
                 allWarningsAsErrors = true
-                freeCompilerArgs += "-Xuse-experimental=kotlin.Experimental"
+                freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
             }
         }
     }

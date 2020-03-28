@@ -10,7 +10,8 @@ import ch.softappeal.yass2.tutorial.contract.generated.*
 import kotlinx.coroutines.*
 
 suspend fun showGeneratedUsage() {
-    useDumper(generatedDumper())
+    val generatedDumper = dumper(GeneratedDumperProperties, BaseDumper)
+    useDumper(generatedDumper)
     useSerializer(GeneratedSerializer)
     useInterceptor(GeneratedProxyFactory)
 }

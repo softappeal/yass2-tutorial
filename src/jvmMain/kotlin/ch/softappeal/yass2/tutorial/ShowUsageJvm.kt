@@ -1,4 +1,4 @@
-@file:UseExperimental(KtorExperimentalAPI::class)
+@file:OptIn(KtorExperimentalAPI::class)
 
 package ch.softappeal.yass2.tutorial
 
