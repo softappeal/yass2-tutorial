@@ -17,14 +17,14 @@ Person(
         Address(
             number = 1
             street = "Infinity Drive"
-        )
+        )#1
         Address(
             street = "Hollywood Boulevard"
-        )
+        )#2
     ]
     gender = Female
     name = "Guru"
-)
+)#0
 
 *** useSerializer ***
 hello
@@ -39,14 +39,14 @@ Person(
         Address(
             number = 1
             street = "Infinity Drive"
-        )
+        )#1
         Address(
             street = "Hollywood Boulevard"
-        )
+        )#2
     ]
     gender = Female
     name = "Guru"
-)
+)#0
 
 *** useSerializer ***
 hello
@@ -66,8 +66,8 @@ acceptorSessionFactory closed: null
 *** useKtorRemoting ***
 1 + 2 = 3
 NewsListener.notify: News 1
-NewsListener.notify: News 2
 1 + 2 = 3
+NewsListener.notify: News 2
 initiatorSessionFactory closed: null
 acceptorSessionFactory closed: null
 ```

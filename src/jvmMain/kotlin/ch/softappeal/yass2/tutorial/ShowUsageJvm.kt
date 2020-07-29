@@ -37,7 +37,7 @@ private suspend fun showReflectionUsage() {
 const val Host = "localhost"
 const val Port = 28947
 private const val Path = "/yass"
-private val Config = TransportConfig(GeneratedSerializer, 100, 100)
+private val Config = TransportConfig(GeneratedSerializer, 100)
 
 fun createKtorEngine(invoker: Invoker): ApplicationEngine = embeddedServer(io.ktor.server.cio.CIO, Port) {
     install(io.ktor.websocket.WebSockets)
