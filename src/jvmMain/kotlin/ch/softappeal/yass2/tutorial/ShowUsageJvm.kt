@@ -50,9 +50,7 @@ fun createKtorEngine(invoker: Invoker): ApplicationEngine = embeddedServer(io.kt
         }
 
         // shows server-side unidirectional remoting with Http
-        route(Config, Path, invoker.tunnel(listOf(
-            CalculatorId(CalculatorImpl) // register Calculator service
-        )))
+        route(Config, Path, invoker.tunnel(Services))
 
         // shows server-side session based bidirectional remoting with WebSocket
         webSocket(Path) { receiveLoop(Config, acceptorSessionFactory()) }
@@ -68,7 +66,7 @@ private suspend fun useKtorRemoting(remoteProxyFactoryCreator: RemoteProxyFactor
             install(io.ktor.client.features.websocket.WebSockets)
         }.use { client ->
             // shows client-side unidirectional remoting with Http
-            useCalculator(client.tunnel(Config, "http://$Host:$Port$Path"), remoteProxyFactoryCreator)
+            useServices(client.tunnel(Config, "http://$Host:$Port$Path"), remoteProxyFactoryCreator)
 
             // shows client-side session based bidirectional remoting with WebSocket
             client.ws(HttpMethod.Get, Host, Port, Path) { receiveLoop(Config, initiatorSessionFactory()) }

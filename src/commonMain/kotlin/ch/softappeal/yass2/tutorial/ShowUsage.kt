@@ -8,6 +8,7 @@ import ch.softappeal.yass2.transport.*
 import ch.softappeal.yass2.tutorial.contract.*
 import ch.softappeal.yass2.tutorial.contract.generated.*
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 
 suspend fun showGeneratedUsage() {
     val generatedDumper = dumper(GeneratedDumperProperties, BaseDumper)
@@ -51,6 +52,8 @@ val NewsListenerImpl = object : NewsListener {
     }
 }
 
+val FlowServiceImpl = flowService { flowId -> (1..(flowId as Int)).asFlow() }
+
 private suspend fun useCalculator(calculator: Calculator) {
     println("1 + 2 = ${calculator.add(1, 2)}")
 }
@@ -66,23 +69,31 @@ suspend fun useInterceptor(proxyFactory: ProxyFactory) {
     println()
 }
 
-suspend fun useCalculator(tunnel: Tunnel, remoteProxyFactoryCreator: RemoteProxyFactoryCreator) {
+suspend fun useServices(tunnel: Tunnel, remoteProxyFactoryCreator: RemoteProxyFactoryCreator) {
     val remoteProxyFactory = remoteProxyFactoryCreator(tunnel)
     val calculator = remoteProxyFactory(CalculatorId)
+    val flowService = remoteProxyFactory(FlowServiceId)
     useCalculator(calculator)
+    val flow = flowService.createFlow<Int>(3)
+    flow.collect { println("value: $it") }
 }
+
+val Services = listOf( // register services
+    CalculatorId(CalculatorImpl),
+    FlowServiceId(FlowServiceImpl)
+)
 
 // The following code is only needed if you use session based bidirectional remoting.
 
 fun CoroutineScope.initiatorSessionFactory(): SessionFactory = {
     object : Session() {
         override val serverTunnel = ::generatedInvoker.tunnel(listOf(
-            NewsListenerId(NewsListenerImpl) // register NewsListener service
+            NewsListenerId(NewsListenerImpl) // register service
         ))
 
         override fun opened() {
             launch {
-                useCalculator(clientTunnel, ::generatedRemoteProxyFactoryCreator)
+                useServices(clientTunnel, ::generatedRemoteProxyFactoryCreator)
                 delay(100) // give the server some time to send news
                 close()
             }
@@ -96,9 +107,7 @@ fun CoroutineScope.initiatorSessionFactory(): SessionFactory = {
 
 fun CoroutineScope.acceptorSessionFactory(): SessionFactory = {
     object : Session() {
-        override val serverTunnel = ::generatedInvoker.tunnel(listOf(
-            CalculatorId(CalculatorImpl) // register Calculator service
-        ))
+        override val serverTunnel = ::generatedInvoker.tunnel(Services)
 
         override fun opened() {
             launch {

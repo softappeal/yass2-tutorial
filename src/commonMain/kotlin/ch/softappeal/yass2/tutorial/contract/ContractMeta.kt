@@ -41,9 +41,10 @@ val GeneratedSerializer = generatedBinarySerializer(BaseEncoders)
 /** Define the [ServiceId] for each contract interface. */
 val CalculatorId = serviceId<Calculator>(1)
 val NewsListenerId = serviceId<NewsListener>(2)
+val FlowServiceId = serviceId<FlowService>(3)
 
 /** Define all used [ServiceId]. */
-val ServiceIds = listOf(CalculatorId, NewsListenerId)
+val ServiceIds = listOf(CalculatorId, NewsListenerId, FlowServiceId)
 
 /**
  * Define [BaseDumper] for base types.
