@@ -2,7 +2,8 @@ package ch.softappeal.yass2.tutorial.contract
 
 import ch.softappeal.yass2.*
 import ch.softappeal.yass2.remote.*
-import ch.softappeal.yass2.remote.session.*
+import ch.softappeal.yass2.remote.coroutines.*
+import ch.softappeal.yass2.remote.coroutines.session.*
 import ch.softappeal.yass2.serialize.binary.*
 import ch.softappeal.yass2.tutorial.contract.generated.*
 

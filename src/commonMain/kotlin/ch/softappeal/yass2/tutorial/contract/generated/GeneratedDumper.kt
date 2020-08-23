@@ -1,7 +1,7 @@
 package ch.softappeal.yass2.tutorial.contract.generated
 
-@Suppress("UNCHECKED_CAST")
-val GeneratedDumperProperties = ch.softappeal.yass2.dumperProperties(
+@Suppress("UNCHECKED_CAST", "RedundantVisibilityModifier")
+public val GeneratedDumperProperties: ch.softappeal.yass2.DumperProperties = ch.softappeal.yass2.dumperProperties(
     ch.softappeal.yass2.remote.Request::class to listOf(
         ch.softappeal.yass2.remote.Request::functionId as kotlin.reflect.KProperty1<Any, Any?>,
         ch.softappeal.yass2.remote.Request::parameters as kotlin.reflect.KProperty1<Any, Any?>,
@@ -13,9 +13,9 @@ val GeneratedDumperProperties = ch.softappeal.yass2.dumperProperties(
     ch.softappeal.yass2.remote.ExceptionReply::class to listOf(
         ch.softappeal.yass2.remote.ExceptionReply::exception as kotlin.reflect.KProperty1<Any, Any?>
     ),
-    ch.softappeal.yass2.remote.session.Packet::class to listOf(
-        ch.softappeal.yass2.remote.session.Packet::message as kotlin.reflect.KProperty1<Any, Any?>,
-        ch.softappeal.yass2.remote.session.Packet::requestNumber as kotlin.reflect.KProperty1<Any, Any?>
+    ch.softappeal.yass2.remote.coroutines.session.Packet::class to listOf(
+        ch.softappeal.yass2.remote.coroutines.session.Packet::message as kotlin.reflect.KProperty1<Any, Any?>,
+        ch.softappeal.yass2.remote.coroutines.session.Packet::requestNumber as kotlin.reflect.KProperty1<Any, Any?>
     ),
     ch.softappeal.yass2.tutorial.contract.Address::class to listOf(
         ch.softappeal.yass2.tutorial.contract.Address::number as kotlin.reflect.KProperty1<Any, Any?>,

@@ -1,15 +1,15 @@
 // https://kotlinlang.org/docs/reference/building-mpp-with-gradle.html
 
-fun ktor(module: String) = "io.ktor:ktor-$module:1.3.2"
+fun yass2(module: String) = "ch.softappeal.yass2:yass2-$module:6.0.0"
 
-val yass2 = "ch.softappeal.yass2:yass2:5.0.0"
+fun ktor(module: String) = "io.ktor:ktor-$module:1.4.0"
 
 plugins {
-    kotlin("multiplatform") version "1.3.72"
+    kotlin("multiplatform") version "1.4.0"
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 kotlin {
@@ -35,12 +35,13 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(yass2)
+                implementation(yass2("coroutines"))
             }
         }
-
         val jvmMain by getting {
             dependencies {
+                implementation(yass2("ktor"))
+                implementation(yass2("reflect"))
                 implementation(ktor("client-cio"))
                 implementation(ktor("server-cio"))
                 implementation(ktor("websockets"))
@@ -48,13 +49,8 @@ kotlin {
         }
         val jvmTest by getting {
             dependencies {
+                implementation(yass2("generate"))
                 implementation(kotlin("test-junit"))
-            }
-        }
-
-        val jsMain by getting {
-            dependencies {
-                api(kotlin("stdlib-js"))
             }
         }
         val jsTest by getting {

@@ -2,9 +2,10 @@
 
 package ch.softappeal.yass2.tutorial
 
-import ch.softappeal.yass2.*
+import ch.softappeal.yass2.reflect.*
 import ch.softappeal.yass2.remote.*
-import ch.softappeal.yass2.serialize.binary.*
+import ch.softappeal.yass2.remote.reflect.*
+import ch.softappeal.yass2.serialize.binary.reflect.*
 import ch.softappeal.yass2.transport.*
 import ch.softappeal.yass2.transport.ktor.*
 import ch.softappeal.yass2.tutorial.contract.*
