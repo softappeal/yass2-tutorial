@@ -3,8 +3,9 @@ package ch.softappeal.yass2.tutorial.contract
 import ch.softappeal.yass2.*
 import ch.softappeal.yass2.remote.*
 import ch.softappeal.yass2.remote.coroutines.*
-import ch.softappeal.yass2.remote.coroutines.session.*
 import ch.softappeal.yass2.serialize.binary.*
+import ch.softappeal.yass2.transport.*
+import ch.softappeal.yass2.transport.session.*
 import ch.softappeal.yass2.tutorial.contract.generated.*
 
 // This file describes the needed contract metadata.
@@ -26,18 +27,14 @@ val BaseEncoders = listOf(
     MyDateEncoder
 )
 
-/**
- * Define all the concrete classes needed by the contract.
- * [Request], [ValueReply] and [ExceptionReply] are always needed (these need [IntEncoder]).
- * [Packet] is only needed when we need [Session].
- */
+/** Define all the concrete classes needed by the contract. */
 val ConcreteClasses = listOf(
-    Request::class, ValueReply::class, ExceptionReply::class,
-    Packet::class,
     Address::class, Person::class, DivideByZeroException::class, SubClass::class
 )
 
 val GeneratedSerializer = generatedBinarySerializer(BaseEncoders)
+val MessageSerializer = binaryMessageSerializer(GeneratedSerializer)
+val PacketSerializer = binaryPacketSerializer(MessageSerializer)
 
 /** Define the [ServiceId] for each contract interface. */
 val CalculatorId = serviceId<Calculator>(1)
@@ -57,3 +54,6 @@ val BaseDumper: BaseDumper = { value ->
         is MyDate -> append("MyDate(${value.currentTimeMillis})")
     }
 }
+
+val MessageConfig = TransportConfig(MessageSerializer, 100)
+val PacketConfig = TransportConfig(PacketSerializer, 100)

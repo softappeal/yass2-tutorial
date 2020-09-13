@@ -6,7 +6,6 @@ import ch.softappeal.yass2.reflect.*
 import ch.softappeal.yass2.remote.*
 import ch.softappeal.yass2.remote.reflect.*
 import ch.softappeal.yass2.serialize.binary.reflect.*
-import ch.softappeal.yass2.transport.*
 import ch.softappeal.yass2.transport.ktor.*
 import ch.softappeal.yass2.tutorial.contract.*
 import ch.softappeal.yass2.tutorial.contract.generated.*
@@ -38,7 +37,6 @@ private suspend fun showReflectionUsage() {
 const val Host = "localhost"
 const val Port = 28947
 private const val Path = "/yass"
-private val Config = TransportConfig(GeneratedSerializer, 100)
 
 fun createKtorEngine(invoker: Invoker): ApplicationEngine = embeddedServer(io.ktor.server.cio.CIO, Port) {
     install(io.ktor.websocket.WebSockets)
@@ -51,10 +49,10 @@ fun createKtorEngine(invoker: Invoker): ApplicationEngine = embeddedServer(io.kt
         }
 
         // shows server-side unidirectional remoting with Http
-        route(Config, Path, invoker.tunnel(Services))
+        route(MessageConfig, Path, invoker.tunnel(Services))
 
         // shows server-side session based bidirectional remoting with WebSocket
-        webSocket(Path) { receiveLoop(Config, acceptorSessionFactory()) }
+        webSocket(Path) { receiveLoop(PacketConfig, acceptorSessionFactory()) }
     }
 }
 
@@ -67,10 +65,10 @@ private suspend fun useKtorRemoting(remoteProxyFactoryCreator: RemoteProxyFactor
             install(io.ktor.client.features.websocket.WebSockets)
         }.use { client ->
             // shows client-side unidirectional remoting with Http
-            useServices(client.tunnel(Config, "http://$Host:$Port$Path"), remoteProxyFactoryCreator)
+            useServices(client.tunnel(MessageConfig, "http://$Host:$Port$Path"), remoteProxyFactoryCreator)
 
             // shows client-side session based bidirectional remoting with WebSocket
-            client.ws(HttpMethod.Get, Host, Port, Path) { receiveLoop(Config, initiatorSessionFactory()) }
+            client.ws(HttpMethod.Get, Host, Port, Path) { receiveLoop(PacketConfig, initiatorSessionFactory()) }
         }
     } finally {
         engine.stop(0, 0, TimeUnit.SECONDS)
