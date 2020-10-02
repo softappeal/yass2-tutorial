@@ -16,10 +16,7 @@ private val MyDateEncoder = BaseEncoder(MyDate::class,
     { reader -> MyDate(reader.readLong()) }
 )
 
-/**
- * Define all the base encoders needed by the contract (including enumerations and own base types).
- * [IntEncoder] is always needed because of [ConcreteClasses] below.
- */
+/** Define all the base encoders needed by the contract (including enumerations and own base types). */
 val BaseEncoders = listOf(
     IntEncoder,
     StringEncoder,
