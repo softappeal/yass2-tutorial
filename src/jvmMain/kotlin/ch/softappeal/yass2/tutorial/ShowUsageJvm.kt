@@ -73,6 +73,6 @@ private suspend fun useKtorRemoting(remoteProxyFactoryCreator: RemoteProxyFactor
     } finally {
         engine.stop(0, 0, TimeUnit.SECONDS)
     }
-    delay(200) // needed for graceful shutdown
+    delay(500) // needed for graceful shutdown
     println()
 }
