@@ -2,7 +2,7 @@
 
 fun yass2(module: String) = "ch.softappeal.yass2:yass2-$module:6.1.0"
 
-fun ktor(module: String) = "io.ktor:ktor-$module:1.4.0"
+fun ktor(module: String) = "io.ktor:ktor-$module:1.4.1"
 
 plugins {
     kotlin("multiplatform") version "1.4.10"
