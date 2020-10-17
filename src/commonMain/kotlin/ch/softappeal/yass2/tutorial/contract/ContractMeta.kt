@@ -21,12 +21,15 @@ val BaseEncoders = listOf(
     IntEncoder,
     StringEncoder,
     enumEncoder<Gender>(),
-    MyDateEncoder
+    MyDateEncoder,
 )
 
 /** Define all the concrete classes needed by the contract. */
 val ConcreteClasses = listOf(
-    Address::class, Person::class, DivideByZeroException::class, SubClass::class
+    Address::class,
+    Person::class,
+    DivideByZeroException::class,
+    SubClass::class,
 )
 
 val GeneratedSerializer = generatedBinarySerializer(BaseEncoders)
@@ -42,10 +45,10 @@ val FlowServiceId = serviceId<FlowService>(3)
 val ServiceIds = listOf(CalculatorId, NewsListenerId, FlowServiceId)
 
 /**
- * Define [BaseDumper] for base types.
+ * Define [ValueDumper] for base types.
  * [Boolean], [Number] and [CharSequence] are handled by default.
  */
-val BaseDumper: BaseDumper = { value ->
+val ValueDumper: ValueDumper = { value ->
     when (value) {
         is Gender -> append(value.name)
         is MyDate -> append("MyDate(${value.currentTimeMillis})")

@@ -16,7 +16,7 @@ class MyDate(val currentTimeMillis: Long)
  * Properties can be optional.
  */
 class Address(
-    val street: String
+    val street: String,
 ) {
     var number: Int? = null
 }
@@ -24,14 +24,14 @@ class Address(
 /** Enumerations are supported. */
 enum class Gender {
     Female,
-    Male
+    Male,
 }
 
 /** Lists are supported. */
 class Person(
     val name: String,
     val gender: Gender,
-    val addresses: List<Address>
+    val addresses: List<Address>,
 )
 
 /**
@@ -50,7 +50,7 @@ abstract class BaseClass {
 
 class SubClass(
     override val baseClassProperty: String,
-    val subClassProperty: String
+    val subClassProperty: String,
 ) : BaseClass()
 
 /**

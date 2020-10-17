@@ -12,7 +12,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
 suspend fun showGeneratedUsage() {
-    val generatedDumper = dumper(GeneratedDumperProperties, BaseDumper)
+    val generatedDumper = dumper(GeneratedDumperProperties, ValueDumper, compact = false)
     useDumper(generatedDumper)
     useSerializer(GeneratedSerializer)
     useInterceptor(GeneratedProxyFactory)

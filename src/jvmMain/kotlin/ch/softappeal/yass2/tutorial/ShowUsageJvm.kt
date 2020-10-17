@@ -2,6 +2,7 @@
 
 package ch.softappeal.yass2.tutorial
 
+import ch.softappeal.yass2.*
 import ch.softappeal.yass2.reflect.*
 import ch.softappeal.yass2.remote.*
 import ch.softappeal.yass2.remote.reflect.*
@@ -29,7 +30,7 @@ fun main() = runBlocking {
 }
 
 private suspend fun showReflectionUsage() {
-    useDumper(reflectionDumper(BaseDumper))
+    useDumper(dumper(ReflectionDumperProperties, ValueDumper, compact = false))
     useSerializer(reflectionBinarySerializer(BaseEncoders, ConcreteClasses))
     useInterceptor(ReflectionProxyFactory)
 }
