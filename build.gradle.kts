@@ -1,12 +1,10 @@
 // https://kotlinlang.org/docs/reference/building-mpp-with-gradle.html
 
-fun yass2(module: String) = "ch.softappeal.yass2:yass2-$module:7.0.0"
-
-fun ktor(module: String) = "io.ktor:ktor-$module:1.4.1"
-
 plugins {
-    kotlin("multiplatform") version "1.4.10"
+    kotlin("multiplatform") version "1.4.20"
 }
+fun yass2(module: String) = "ch.softappeal.yass2:yass2-$module:7.0.1"
+fun ktor(module: String) = "io.ktor:ktor-$module:1.4.2"
 
 repositories {
     mavenCentral()
