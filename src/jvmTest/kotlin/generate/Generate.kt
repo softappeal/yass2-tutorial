@@ -6,7 +6,7 @@ import java.io.*
 
 private fun generate(fileName: String, code: String) {
     val text = "package ch.softappeal.yass2.tutorial.contract.generated\n\n$code"
-    val filePath = "src/commonMain/kotlin/ch/softappeal/yass2/tutorial/contract/generated/$fileName"
+    val filePath = "src/commonMain/kotlin/contract/generated/$fileName"
     check(text == File(filePath).readText().replace("\r\n", "\n")) // only needed for validating files
     File(filePath).writeText(text)
 }

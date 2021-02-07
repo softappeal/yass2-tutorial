@@ -2,11 +2,11 @@
 
 * [yass2](https://github.com/softappeal/yass2/)
 
-* [Common Module](src/commonMain/kotlin/ch/softappeal/yass2/tutorial)
+* [Common Module](src/commonMain/kotlin)
 
-* [Jvm Module](src/jvmMain/kotlin/ch/softappeal/yass2/tutorial)
+* [Jvm Module](src/jvmMain/kotlin)
 
-* [Js Module](src/jsMain)
+* [Js Module](src/jsMain/kotlin)
 
 Output
 
