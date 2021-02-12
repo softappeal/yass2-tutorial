@@ -1,10 +1,10 @@
 // https://kotlinlang.org/docs/reference/building-mpp-with-gradle.html
 
 plugins {
-    kotlin("multiplatform") version "1.4.20"
+    kotlin("multiplatform") version "1.4.30"
 }
-fun yass2(module: String) = "ch.softappeal.yass2:yass2-$module:7.0.1"
-fun ktor(module: String) = "io.ktor:ktor-$module:1.4.2"
+fun yass2(module: String) = "ch.softappeal.yass2:yass2-$module:7.0.2"
+fun ktor(module: String) = "io.ktor:ktor-$module:1.5.1"
 
 repositories {
     mavenCentral()
@@ -25,7 +25,6 @@ kotlin {
         compilations.all {
             kotlinOptions {
                 allWarningsAsErrors = true
-                freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
             }
         }
     }

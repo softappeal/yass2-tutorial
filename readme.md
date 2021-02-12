@@ -61,8 +61,8 @@ value: 1
 value: 2
 value: 3
 NewsListener.notify: News 1
-1 + 2 = 3
 NewsListener.notify: News 2
+1 + 2 = 3
 value: 1
 value: 2
 value: 3
@@ -75,8 +75,8 @@ value: 1
 value: 2
 value: 3
 NewsListener.notify: News 1
-NewsListener.notify: News 2
 1 + 2 = 3
+NewsListener.notify: News 2
 value: 1
 value: 2
 value: 3

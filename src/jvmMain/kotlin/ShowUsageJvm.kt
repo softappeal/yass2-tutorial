@@ -1,5 +1,3 @@
-@file:OptIn(KtorExperimentalAPI::class)
-
 package ch.softappeal.yass2.tutorial
 
 import ch.softappeal.yass2.*
@@ -17,7 +15,6 @@ import io.ktor.http.*
 import io.ktor.http.content.*
 import io.ktor.routing.*
 import io.ktor.server.engine.*
-import io.ktor.util.*
 import io.ktor.websocket.*
 import kotlinx.coroutines.*
 import java.util.concurrent.*
@@ -43,8 +40,7 @@ fun createKtorEngine(invoker: Invoker): ApplicationEngine = embeddedServer(io.kt
     install(io.ktor.websocket.WebSockets)
     routing {
         static {
-            // serves static content needed for js tutorial
-            files("./")
+            files("./") // needed for debugging (sources)
             files("./src/jsMain/resources")
             files("./build/js/node_modules")
         }
