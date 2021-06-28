@@ -5,7 +5,7 @@ import kotlin.test.*
 
 class TutorialTest {
     @Test
-    fun test() = GlobalScope.launch {
+    fun test() = @OptIn(DelicateCoroutinesApi::class) GlobalScope.launch {
         showGeneratedUsage()
     }
 }

@@ -1,8 +1,8 @@
 plugins {
-    kotlin("multiplatform") version "1.4.32"
+    kotlin("multiplatform") version "1.5.20"
 }
-fun yass2(module: String) = "ch.softappeal.yass2:yass2-$module:7.1.0"
-fun ktor(module: String) = "io.ktor:ktor-$module:1.5.2"
+fun yass2(module: String) = "ch.softappeal.yass2:yass2-$module:8.0.0"
+fun ktor(module: String) = "io.ktor:ktor-$module:1.6.0"
 
 repositories {
     mavenCentral()
@@ -23,6 +23,7 @@ kotlin {
         compilations.all {
             kotlinOptions {
                 allWarningsAsErrors = true
+                freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
             }
         }
     }
@@ -31,6 +32,11 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(yass2("coroutines"))
+            }
+        }
+        val commonTest by getting {
+            dependencies {
+                implementation(kotlin("test"))
             }
         }
         val jvmMain by getting {
@@ -45,12 +51,6 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(yass2("generate"))
-                implementation(kotlin("test-junit"))
-            }
-        }
-        val jsTest by getting {
-            dependencies {
-                implementation(kotlin("test-js"))
             }
         }
     }
