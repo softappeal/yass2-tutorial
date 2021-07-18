@@ -2,14 +2,12 @@ package ch.softappeal.yass2.tutorial
 
 import ch.softappeal.yass2.*
 import ch.softappeal.yass2.remote.*
-import ch.softappeal.yass2.remote.coroutines.*
 import ch.softappeal.yass2.remote.coroutines.session.*
 import ch.softappeal.yass2.serialize.*
 import ch.softappeal.yass2.transport.*
 import ch.softappeal.yass2.tutorial.contract.*
 import ch.softappeal.yass2.tutorial.contract.generated.*
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
 
 suspend fun showGeneratedUsage() {
     val generatedDumper = dumper(GeneratedDumperProperties, ValueDumper, compact = false)
@@ -53,8 +51,6 @@ val NewsListenerImpl = object : NewsListener {
     }
 }
 
-val FlowServiceImpl = flowService { flowId -> (1..(flowId as Int)).asFlow() }
-
 private suspend fun useCalculator(calculator: Calculator) {
     println("1 + 2 = ${calculator.add(1, 2)}")
 }
@@ -73,15 +69,12 @@ suspend fun useInterceptor(proxyFactory: ProxyFactory) {
 suspend fun useServices(tunnel: Tunnel, remoteProxyFactoryCreator: RemoteProxyFactoryCreator) {
     val remoteProxyFactory = remoteProxyFactoryCreator(tunnel)
     val calculator = remoteProxyFactory(CalculatorId)
-    val flowService = remoteProxyFactory(FlowServiceId)
     useCalculator(calculator)
-    val flow = flowService.createFlow<Int>(3)
-    flow.collect { println("value: $it") }
 }
 
-val Services = listOf( // register services
+val Services = listOf(
+    // register services
     CalculatorId(CalculatorImpl),
-    FlowServiceId(FlowServiceImpl)
 )
 
 // The following code is only needed if you use session based bidirectional remoting.

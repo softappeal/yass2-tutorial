@@ -2,7 +2,6 @@ package ch.softappeal.yass2.tutorial.contract
 
 import ch.softappeal.yass2.*
 import ch.softappeal.yass2.remote.*
-import ch.softappeal.yass2.remote.coroutines.*
 import ch.softappeal.yass2.serialize.binary.*
 import ch.softappeal.yass2.transport.*
 import ch.softappeal.yass2.transport.session.*
@@ -39,10 +38,9 @@ val PacketSerializer = binaryPacketSerializer(MessageSerializer)
 /** Define the [ServiceId] for each contract interface. */
 val CalculatorId = serviceId<Calculator>(1)
 val NewsListenerId = serviceId<NewsListener>(2)
-val FlowServiceId = serviceId<FlowService>(3)
 
 /** Define all used [ServiceId]. */
-val ServiceIds = listOf(CalculatorId, NewsListenerId, FlowServiceId)
+val ServiceIds = listOf(CalculatorId, NewsListenerId)
 
 /**
  * Define [ValueDumper] for base types.
