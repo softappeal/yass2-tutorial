@@ -1,8 +1,8 @@
 plugins {
-    kotlin("multiplatform") version "1.5.20"
+    kotlin("multiplatform") version "1.5.21"
 }
-fun yass2(module: String) = "ch.softappeal.yass2:yass2-$module:8.0.0"
-fun ktor(module: String) = "io.ktor:ktor-$module:1.6.0"
+fun yass2(module: String) = "ch.softappeal.yass2:yass2-$module:8.0.1"
+fun ktor(module: String) = "io.ktor:ktor-$module:1.6.1"
 
 repositories {
     mavenCentral()
